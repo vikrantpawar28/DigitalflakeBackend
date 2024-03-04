@@ -8,7 +8,6 @@ exports.createProduct = async (req, res) => {
       categoryName,
       packSize,
       mrp,
-      productImage,
       status,
     } = req.body;
 
@@ -17,7 +16,7 @@ exports.createProduct = async (req, res) => {
       categoryName,
       packSize,
       mrp,
-      productImage,
+      productImage: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
       status,
     });
 
@@ -59,7 +58,7 @@ exports.updateProduct = async (req, res) => {
         productImage,
         status,
       },
-      { new: true } 
+      { new: true }
     );
 
     if (!updatedProduct) {
